@@ -2,7 +2,7 @@
 
 下载软件
 
-```
+```sh
 yay -S 软件名称
 ```
 
@@ -12,7 +12,17 @@ yay -S 软件名称
 
 
 
-gitlazy使用
+
+
+## 安装lazygit
+
+```sh
+sudo pacman -S lazygit
+```
+
+
+
+## gitlazy使用
 
 a	添加上传文件
 
@@ -34,9 +44,11 @@ p	下载云文件
 
 可以把 Pacman 理解为一个软件管理器（软件管家？），可以进行软件的安装、删除、查询等：
 
+
+
 bash
 
-```
+```sh
 sudo pacman -S package_name # 安装软件包
 
 sudo pacman -Si # 在同步数据库中搜索包，包括包的名称和描述
@@ -69,19 +81,123 @@ ranger	#	终端文件管理器
 
 gdu	#	查看硬盘使用
 
+nvim .zshrc	#	.zshrc是zsh的配置文件，zsh 基本兼容 bash
+
+source .zshrc	#	重新加载一遍配置文件
+```
+
+
+
+## 安装输入法
+
+```sh
+sudo pacman -S fcitx5-im # 输入法基础包组
+
+sudo pacman -S fcitx5-chinese-addons # 官方中文输入引擎
+
+sudo pacman -S fcitx5-pinyin-moegirl # 萌娘百科词库。二刺猿必备（archlinuxcn）
+
+sudo pacman -S fcitx5-material-color # 输入法主题
+```
+
+此外，我们还需要设置环境变量。通过 `vim` 编辑文件 `/etc/environment`：
+
+```sh
+sudo vim /etc/environment
+```
+
+在文件中加入以下内容并保存退出：
+
+```sh
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+SDL_IM_MODULE=fcitx
+GLFW_IM_MODULE=ibus
 ```
 
 
 
 
 
+## 安装和配置 v2ray 和 v2rayA: 
+
+```sh
+sudo pacman -S v2ray v2raya
+```
+
+安装后启动服务：
+
+```
+sudo systemctl enable --now v2raya
+```
+
+随后在开始菜单中搜索 v2rayA，点击即可打开浏览器页面。在其中加入订阅(没有魔法上网节点？请参考[原文档相关内容](https://archlinuxstudio.github.io/ArchLinuxTutorial/#/rookie/fxckGFW?id=已有科学上网的节点的情况))。在设置中建议开启全局透明代理(选择`大陆白名单`)，同时开启防止 DNS 劫持功能，否则可能会拿不到被 DNS 污染的资源(如 github raw)。
 
 
 
+## 基础功能包
+
+```sh
+sudo pacman -S sof-firmware alsa-firmware alsa-ucm-conf # 声音固件
+sudo pacman -S ntfs-3g # 使系统可以识别 NTFS 格式的硬盘
+sudo pacman -S adobe-source-han-serif-cn-fonts wqy-zenhei # 安装几个开源中文字体。一般装上文泉驿就能解决大多 wine 应用中文方块的问题
+sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra # 安装谷歌开源字体及表情
+sudo pacman -S firefox google-chrome  # 安装常用的火狐、chrome浏览器
+sudo pacman -S ark # 压缩软件。在 dolphin 中可用右键解压压缩包
+sudo pacman -S packagekit-qt5 packagekit appstream-qt appstream # 确保 Discover（软件中心）可用，需重启
+sudo pacman -S gwenview # 图片查看器
+sudo pacman -S steam # 游戏商店。稍后看完显卡驱动章节再使用
+```
 
 
 
+## 安装使用zsh及其精简包
 
+```sh
+# 找一个地方clone本仓库 例如 ~/.config
+git clone https://github.com/yaocccc/omz
+
+# 在你的zsh配置里 source ~/.config/omz/omz.zsh (举例)
+echo "source ~/.config/omz/omz.zsh" >> ~/.zshrc
+```
+
+要求以下配置
+
+- zsh
+
+  ```sh
+  sudo pacman -S zsh	#	 通过以下命令安装 zsh 相关的包
+  ```
+
+  
+
+- fzf
+
+  ```sh
+  请自行安装fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  ```
+
+  
+
+- fd
+
+	```sh
+	# 请自行安装fd
+	On Arch Linux: pacman -S fd
+	```
+
+- bat (可选 更好的文本预览效果)
+
+- exa (可选 更好的目录预览效果)
+
+- ueberzug (可选 可在x11终端下预览图片)
+
+
+
+## openbox的快捷命令
 
 **这里的mod在键盘上为win键**
 
